@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz_app/screens/leaderboard_screen.dart';
 import 'package:quiz_app/screens/questions_screen.dart';
+import 'package:quiz_app/screens/quiz_info_screen.dart';
 
 class QuizListScreen extends StatefulWidget {
   const QuizListScreen({super.key});
@@ -85,7 +85,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QuestionsScreen(quizId: quiz['id']),
+                      builder: (context) => QuizInfoScreen(quizId: quiz['id']),
                     ),
                   );
                 },

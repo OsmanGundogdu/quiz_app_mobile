@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:quiz_app/screens/user_profile_screen.dart';
 import 'screens/quizzes_screen.dart';
 
 void main() async {
@@ -15,6 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // login yapan kullanıcının idsi gelecek.
+      // home: UserProfileScreen(
+      //   userID: user['id'],
+      // ),
       home: QuizListScreen(),
     );
   }

@@ -64,8 +64,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          UserProfileScreen(userID: user['id']),
+                      builder: (context) => UserProfileScreen(
+                        userID: user['id'],
+                      ),
                     ),
                   )
                 },
