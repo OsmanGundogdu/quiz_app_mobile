@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz_app/screens/leaderboard_screen.dart';
-import 'package:quiz_app/screens/questions_screen.dart';
 import 'package:quiz_app/screens/quiz_info_screen.dart';
 
 class QuizListScreen extends StatefulWidget {

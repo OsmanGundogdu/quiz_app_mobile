@@ -6,6 +6,7 @@ class User {
   String? firstName;
   String? lastName;
   int? totalScore;
+  String? password;
   List<Quiz> quizzes = [];
 
   User(Map<String, dynamic> map) {
@@ -13,6 +14,7 @@ class User {
     firstName = map["firstname"];
     lastName = map["lastname"];
     totalScore = map["totalScore"];
+    password = map["password"];
   }
 
   static Future<User> userProfile(String userId) async {

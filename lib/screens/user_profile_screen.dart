@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz_app/model/user.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -12,7 +11,6 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   User? user;
   List<String> quizTitles = [];
   bool isLoading = true;

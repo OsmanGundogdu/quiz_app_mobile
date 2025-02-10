@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Question {
   String? correctAnswer;
-  List<String>? options = [];
+  List<dynamic>? options = [];
   String? text;
 
   Question(Map<String, dynamic> map) {

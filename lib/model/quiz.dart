@@ -4,15 +4,17 @@ import 'package:quiz_app/model/question.dart';
 class Quiz {
   String? title;
   List<Question> questions = [];
+  String? level;
 
   Quiz(Map<String, dynamic> map) {
     title = map['title'];
+    level = map['level'];
   }
 
-  static Future<Quiz> QuizWithQuestions(String userId) async {
+  static Future<Quiz> quizWithQuestions(String quizId) async {
     DocumentSnapshot quizDoc = await FirebaseFirestore.instance
         .collection('quizzes')
-        .doc(userId)
+        .doc(quizId)
         .get();
 
     var map = quizDoc.data() as Map<String, dynamic>;
