@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:quiz_app/model/user.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final String userID;
@@ -12,7 +13,8 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  Map<String, dynamic>? user;
+  User? user;
+  List<String> quizTitles = [];
   bool isLoading = true;
 
   @override
@@ -23,22 +25,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   Future<void> _fetchUserData() async {
     try {
-      DocumentSnapshot userDoc =
-          await _firestore.collection('users').doc(widget.userID).get();
-
-      if (userDoc.exists) {
-        setState(() {
-          user = userDoc.data() as Map<String, dynamic>;
-          isLoading = false;
-        });
-      } else {
-        setState(() {
-          user = null;
-          isLoading = false;
-        });
-      }
+      user = await User.userProfile(widget.userID);
+      setState(() {
+        isLoading = false;
+      });
     } catch (e) {
-      print("Error fetching user: $e");
+      print("Kullanıcı bilgileri çekilirken beklenmeyen bir hata oluştu: $e");
       setState(() {
         user = null;
         isLoading = false;
@@ -62,22 +54,35 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("İsim: ${user!['firstname'] ?? 'Bilinmiyor'}",
-                          style: const TextStyle(fontSize: 18)),
-                      const SizedBox(height: 8),
-                      Text("Soyisim: ${user!['lastname'] ?? 'Bilinmiyor'}",
-                          style: const TextStyle(fontSize: 18)),
-                      const SizedBox(height: 8),
-                      Text("Email: ${user!['email'] ?? 'Bilinmiyor'}",
+                      Text(
+                          "İsim: ${user?.firstName ?? 'Herhangi bir veri yok...'}",
                           style: const TextStyle(fontSize: 18)),
                       const SizedBox(height: 8),
                       Text(
-                          "Yapılmış testler: ${user!['quizzesTaken'] ?? 'Bilinmiyor'}",
+                          "Soyisim: ${user?.lastName ?? 'Herhangi bir veri yok...'}",
                           style: const TextStyle(fontSize: 18)),
                       const SizedBox(height: 8),
-                      Text("Toplam puan: ${user!['totalScore'] ?? 0}",
-                          style: const TextStyle(
+                      Text(
+                          "Email: ${user?.email ?? 'Herhangi bir veri yok...'}",
+                          style: const TextStyle(fontSize: 18)),
+                      const SizedBox(height: 8),
+                      Text("Toplam puan: ${user?.totalScore ?? 0}",
+                          style: const TextStyle(fontSize: 18)),
+                      const SizedBox(height: 16),
+                      const Text("Yapılmış Testler:",
+                          style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 8),
+                      user!.quizzes.isEmpty
+                          ? const Text("*** Henüz test çözülmedi ***",
+                              style: TextStyle(fontSize: 16))
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: user!.quizzes
+                                  .map((quiz) => Text("- ${quiz.title}",
+                                      style: const TextStyle(fontSize: 16)))
+                                  .toList(),
+                            ),
                     ],
                   ),
                 ),
