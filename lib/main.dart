@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
       // home: UserProfileScreen(
       //   userID: user['id'],
       // ),
+
+      // home: SplashScreen(),
       home: QuizListScreen(),
     );
   }

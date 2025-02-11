@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:quiz_app/screens/user_profile_screen.dart';
+import 'package:quiz_app/screens/show_user_profile_screen.dart';
 
 class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key});
@@ -64,7 +64,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => UserProfileScreen(
+                      builder: (context) => ShowUserProfileScreen(
                         userID: user['id'],
                       ),
                     ),
