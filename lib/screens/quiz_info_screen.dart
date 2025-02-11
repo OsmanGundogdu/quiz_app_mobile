@@ -48,31 +48,33 @@ class _QuizInfoScreenState extends State<QuizInfoScreen> {
           : quiz == null
               ? const Center(child: Text("Test bulunamadı"))
               : Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("İsim: ${quiz?.title ?? 'Herhangi bir veri yok...'}",
-                          style: const TextStyle(fontSize: 18)),
+                          style: const TextStyle(fontSize: 20)),
                       const SizedBox(height: 8),
                       Text(
                           "Zorluk seviyesi: ${quiz?.level ?? 'Herhangi bir veri yok...'}",
-                          style: const TextStyle(fontSize: 18)),
-                      const SizedBox(height: 8),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    QuestionsScreen(quizId: widget.quizId),
-                              ),
-                            );
-                          },
-                          child: Text("Testi Çöz!"))
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => QuestionsScreen(quizId: widget.quizId),
+            ),
+          );
+        },
+        child: const Icon(Icons.play_arrow, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       backgroundColor: Colors.tealAccent,
     );
   }

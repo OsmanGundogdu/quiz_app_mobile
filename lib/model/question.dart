@@ -1,11 +1,11 @@
 class Question {
   String? correctAnswer;
-  List<dynamic>? options = [];
+  List<String> options = [];
   String? text;
 
   Question(Map<String, dynamic> map) {
     correctAnswer = map['correctAnswer'];
-    options = map['options'];
+    options = (map['options'] as List).map((a) => a.toString()).toList();
     text = map['text'];
   }
 }
