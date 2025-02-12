@@ -104,7 +104,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           setState(() {
             _selectedindex = index;
           });
+          switch (index) {
+            case 0:
+              Navigator.of(context).pushNamed('/profile');
+              break;
+            case 1:
+              Navigator.of(context).pushNamed('/quizlist');
+              break;
+            case 2:
+              Navigator.of(context).pushNamed('/leaderboard');
+              break;
+          }
         },
+        indicatorColor: Colors.tealAccent,
         backgroundColor: Colors.teal,
         destinations: const <Widget>[
           NavigationDestination(
