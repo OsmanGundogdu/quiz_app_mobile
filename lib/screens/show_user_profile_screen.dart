@@ -40,7 +40,8 @@ class _ShowUserProfileScreenState extends State<ShowUserProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${user?.firstName}' un profili"),
+        title: Text("${user?.firstName} ${user?.lastName}",
+            style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal,
       ),
       body: isLoading

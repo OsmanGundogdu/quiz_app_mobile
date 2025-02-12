@@ -43,7 +43,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TESTLER"),
+        title: Text("TESTLER", style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal,
         actions: [
           IconButton(

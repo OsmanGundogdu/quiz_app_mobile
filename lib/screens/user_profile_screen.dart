@@ -52,7 +52,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profilim",
+        title: const Text("PROFİLİM",
             style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal,
       ),
@@ -98,41 +98,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ),
                 ),
       backgroundColor: Colors.tealAccent,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedindex,
-        onDestinationSelected: (int index) {
-          setState(() {
-            _selectedindex = index;
-          });
-          switch (index) {
-            case 0:
-              Navigator.of(context).pushNamed('/profile');
-              break;
-            case 1:
-              Navigator.of(context).pushNamed('/quizlist');
-              break;
-            case 2:
-              Navigator.of(context).pushNamed('/leaderboard');
-              break;
-          }
-        },
-        indicatorColor: Colors.tealAccent,
-        backgroundColor: Colors.teal,
-        destinations: const <Widget>[
-          NavigationDestination(
-            icon: Icon(Icons.person, color: Colors.black),
-            label: 'Profilim',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.home, color: Colors.black),
-            label: 'Ana Sayfa',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.leaderboard, color: Colors.black),
-            label: 'Liderlik Tablosu',
-          ),
-        ],
-      ),
     );
   }
 }

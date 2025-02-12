@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/model/user.dart';
+import 'package:quiz_app/screens/_layout.dart';
 import 'package:quiz_app/screens/register_screen.dart';
 import 'package:quiz_app/screens/user_profile_screen.dart';
 
@@ -52,9 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => UserProfileScreen(
-                      userID: user!.userID!,
-                    ),
+                    builder: (context) => Layout(),
                   ),
                   (route) => false,
                 );

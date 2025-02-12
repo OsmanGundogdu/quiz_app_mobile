@@ -33,7 +33,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("LİDERLİK TABLOSU"),
+        title: Text("LİDERLİK TABLOSU",
+            style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(

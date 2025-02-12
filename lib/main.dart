@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         "/quizlist": (BuildContext context) => QuizListScreen(),
         "/leaderboard": (BuildContext context) => LeaderboardScreen(),
       },
+      initialRoute: "/profile",
       // login yapan kullanıcının idsi gelecek.
       // home: UserProfileScreen(
       //   userID: user['id'],
