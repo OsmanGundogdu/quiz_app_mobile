@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/model/user.dart';
+import 'package:quiz_app/screens/leaderboard_screen.dart';
+import 'package:quiz_app/screens/quizzes_screen.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final String userID;
@@ -14,6 +16,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   User? user;
   List<String> quizTitles = [];
   bool isLoading = true;
+  int _selectedindex = 0;
+
+  List<Widget> _screens = [];
 
   @override
   void initState() {
@@ -27,6 +32,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       setState(() {
         isLoading = false;
       });
+      _screens = [
+        QuizListScreen(),
+        UserProfileScreen(
+          userID: user!.userID!,
+        ),
+        LeaderboardScreen(),
+      ];
     } catch (e) {
       print("Kullanıcı bilgileri çekilirken beklenmeyen bir hata oluştu: $e");
       setState(() {
@@ -40,7 +52,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profilim"),
+        title: const Text("Profilim",
+            style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal,
       ),
       body: isLoading
@@ -85,6 +98,29 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ),
                 ),
       backgroundColor: Colors.tealAccent,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedindex,
+        onDestinationSelected: (int index) {
+          setState(() {
+            _selectedindex = index;
+          });
+        },
+        backgroundColor: Colors.teal,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Icons.person, color: Colors.black),
+            label: 'Profilim',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.home, color: Colors.black),
+            label: 'Ana Sayfa',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.leaderboard, color: Colors.black),
+            label: 'Liderlik Tablosu',
+          ),
+        ],
+      ),
     );
   }
 }
