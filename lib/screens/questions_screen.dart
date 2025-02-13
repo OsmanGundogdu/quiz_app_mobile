@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/model/quiz.dart';
 import 'package:quiz_app/model/user.dart';
+import 'package:quiz_app/screens/_layout.dart';
 
 class QuestionsScreen extends StatefulWidget {
   final String quizId;
@@ -80,6 +81,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               Navigator.pop(context);
               // second pop for go back to the main screen
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Layout(),
+                ),
+              );
               setState(() {
                 user!.totalScore = user.totalScore! + dogruCevapSayisi * 5;
                 user.quizzes.add(quiz!);
@@ -97,13 +104,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     if (isLoading) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
+        backgroundColor: Colors.tealAccent,
       );
     }
 
     if (questions.isEmpty) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text("Sorular"),
+          title: const Text("Sorular",
+              style: TextStyle(fontWeight: FontWeight.bold)),
           backgroundColor: Colors.teal,
         ),
         body: const Center(
@@ -121,7 +130,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Soru ${currentQuestionIndex + 1} / ${questions.length}"),
+        title: Text("Soru ${currentQuestionIndex + 1} / ${questions.length}",
+            style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal,
       ),
       body: Padding(

@@ -15,6 +15,7 @@ class _LayoutState extends State<Layout> {
       body: _getPage(_selectedIndex),
       backgroundColor: Colors.tealAccent,
       bottomNavigationBar: BottomNavigationBar(
+        mouseCursor: SystemMouseCursors.grab,
         backgroundColor: Colors.teal,
         currentIndex: _selectedIndex,
         onTap: (index) {
@@ -38,8 +39,9 @@ class _LayoutState extends State<Layout> {
         ],
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.white,
-        selectedIconTheme: IconThemeData(color: Colors.black),
+        selectedIconTheme: IconThemeData(color: Colors.black, size: 35),
         unselectedIconTheme: IconThemeData(color: Colors.white),
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

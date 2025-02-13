@@ -34,9 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateTo(Widget screen) {
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => screen),
+        (route) => false,
       );
     });
   }

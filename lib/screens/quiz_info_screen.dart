@@ -24,15 +24,19 @@ class _QuizInfoScreenState extends State<QuizInfoScreen> {
   Future<void> _fetchQuizData() async {
     try {
       quiz = await Quiz.quizWithQuestions(widget.quizId);
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     } catch (e) {
       print("Test biligileri çekilirken beklenmeyen bir hata oluştu: $e");
-      setState(() {
-        quiz = null;
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          quiz = null;
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -40,7 +44,8 @@ class _QuizInfoScreenState extends State<QuizInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TEST DETAYLARI'),
+        title: Text('TEST DETAYLARI',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal,
       ),
       body: isLoading
@@ -65,11 +70,12 @@ class _QuizInfoScreenState extends State<QuizInfoScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         onPressed: () {
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) => QuestionsScreen(quizId: widget.quizId),
             ),
+            (route) => false,
           );
         },
         child: const Icon(Icons.play_arrow, color: Colors.white),

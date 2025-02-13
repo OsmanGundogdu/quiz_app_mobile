@@ -29,9 +29,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Future<void> _fetchUserData() async {
     try {
       user = await User.userProfile(widget.userID);
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
       _screens = [
         QuizListScreen(),
         UserProfileScreen(

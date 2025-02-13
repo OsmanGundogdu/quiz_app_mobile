@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/model/user.dart';
 import 'package:quiz_app/screens/_layout.dart';
 import 'package:quiz_app/screens/register_screen.dart';
-import 'package:quiz_app/screens/user_profile_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -28,7 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title:
+            const Text("Giriş", style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               controller: passwordController,
-              decoration: const InputDecoration(labelText: "Password"),
+              decoration: const InputDecoration(labelText: "Şifre"),
               obscureText: true,
             ),
             ElevatedButton(
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   (route) => false,
                 );
               },
-              child: const Text("Login"),
+              child: const Text("Giriş Yap"),
             ),
             TextButton(
               onPressed: () {
