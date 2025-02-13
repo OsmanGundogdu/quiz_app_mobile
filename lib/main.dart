@@ -19,13 +19,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        "/profile": (BuildContext context) => UserProfileScreen(
-              userID: 'fz4WcDPuadF8TvEcQqx5',
-            ),
+        "/profile": (BuildContext context) => UserProfileScreen(),
         "/quizlist": (BuildContext context) => QuizListScreen(),
         "/leaderboard": (BuildContext context) => LeaderboardScreen(),
       },
-      initialRoute: "/profile",
       // login yapan kullanıcının idsi gelecek.
       // home: UserProfileScreen(
       //   userID: user['id'],

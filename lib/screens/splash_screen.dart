@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/screens/_layout.dart';
 //import 'package:localstorage/localstorage.dart';
 import 'package:quiz_app/screens/login_screen.dart';
 import 'package:quiz_app/screens/quizzes_screen.dart';
 import 'package:quiz_app/screens/user_profile_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   // check if there is a user in localstorage
@@ -23,13 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkUserLoginStatus() async {
-    //String? userId = localStorage.getItem("userId");
+    final prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString("userId");
 
-    // if (userId != null && userId.isNotEmpty) {
-    //_navigateTo(const UserProfileScreen(userID: ,));
-    // } else {
-    _navigateTo(const LoginScreen());
-    // }
+    if (userId != null && userId.isNotEmpty) {
+      _navigateTo(Layout());
+    } else {
+      _navigateTo(const LoginScreen());
+    }
   }
 
   void _navigateTo(Widget screen) {

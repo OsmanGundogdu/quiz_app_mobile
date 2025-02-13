@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/model/user.dart';
 import 'package:quiz_app/screens/leaderboard_screen.dart';
 import 'package:quiz_app/screens/quizzes_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  final String userID;
-
-  const UserProfileScreen({super.key, required this.userID});
+  const UserProfileScreen({super.key});
 
   @override
   _UserProfileScreenState createState() => _UserProfileScreenState();
@@ -16,9 +15,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   User? user;
   List<String> quizTitles = [];
   bool isLoading = true;
-  int _selectedindex = 0;
-
-  List<Widget> _screens = [];
 
   @override
   void initState() {
@@ -28,19 +24,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   Future<void> _fetchUserData() async {
     try {
-      user = await User.userProfile(widget.userID);
+      final prefs = await SharedPreferences.getInstance();
+      String? userId = prefs.getString("userId");
+      user = await User.userProfile(userId!);
       if (mounted) {
         setState(() {
           isLoading = false;
         });
       }
-      _screens = [
-        QuizListScreen(),
-        UserProfileScreen(
-          userID: user!.userID!,
-        ),
-        LeaderboardScreen(),
-      ];
     } catch (e) {
       print("Kullanıcı bilgileri çekilirken beklenmeyen bir hata oluştu: $e");
       setState(() {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/screens/leaderboard_screen.dart';
 import 'package:quiz_app/screens/quizzes_screen.dart';
 import 'package:quiz_app/screens/user_profile_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Layout extends StatefulWidget {
   @override
@@ -12,7 +13,18 @@ class _LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _getPage(_selectedIndex),
+      body: FutureBuilder<Widget>(
+        future: _getPage(_selectedIndex),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return snapshot.data ?? Center(child: Text('No data'));
+          }
+        },
+      ),
       backgroundColor: Colors.tealAccent,
       bottomNavigationBar: BottomNavigationBar(
         mouseCursor: SystemMouseCursors.grab,
@@ -48,14 +60,18 @@ class _LayoutState extends State<Layout> {
 
   int _selectedIndex = 0;
 
-  Widget _getPage(int index) {
+  Future<Widget> _getPage(int index) async {
     switch (index) {
       case 0:
         return QuizListScreen();
       case 1:
-        return UserProfileScreen(
-          userID: 'fz4WcDPuadF8TvEcQqx5',
-        );
+        final prefs = await SharedPreferences.getInstance();
+        String? userId = prefs.getString("userId");
+        if (userId != null) {
+          return UserProfileScreen();
+        } else {
+          return Center(child: Text('İlgili kullanıcı bulunamadı'));
+        }
       case 2:
         return LeaderboardScreen();
       default:
