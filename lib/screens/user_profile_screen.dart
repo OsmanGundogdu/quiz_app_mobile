@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/model/user.dart';
-import 'package:quiz_app/screens/leaderboard_screen.dart';
-import 'package:quiz_app/screens/quizzes_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -48,6 +46,29 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         title: const Text("PROFİLİM",
             style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.teal,
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.teal,
+              foregroundColor: Colors.black,
+            ),
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.remove("userId");
+              Navigator.pushReplacementNamed(context, "/login");
+            },
+            child: Row(
+              children: [
+                Text(
+                  "Çıkış Yap",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 8),
+                Icon(Icons.logout_sharp, color: Colors.black),
+              ],
+            ),
+          ),
+        ],
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())

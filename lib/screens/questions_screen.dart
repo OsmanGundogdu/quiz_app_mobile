@@ -171,17 +171,36 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 32),
-            child: FloatingActionButton(
-              onPressed: previousQuestion,
-              backgroundColor: Colors.black,
-              child: const Icon(Icons.arrow_back, color: Colors.white),
-            ),
+            child: currentQuestionIndex > 0
+                ? FloatingActionButton(
+                    onPressed: previousQuestion,
+                    backgroundColor: Colors.black,
+                    child: const Icon(Icons.arrow_back, color: Colors.white),
+                  )
+                : const SizedBox(),
           ),
-          FloatingActionButton(
-            onPressed: nextQuestion,
-            backgroundColor: Colors.black,
-            child: const Icon(Icons.arrow_forward, color: Colors.white),
-          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 32),
+              child: currentQuestionIndex == questions.length - 1
+                  ? ElevatedButton(
+                      onPressed: _showCompletionDialog,
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.teal,
+                          fixedSize: Size(160, 50)),
+                      child: Text(
+                        "TESTİ BİTİR",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ))
+                  : FloatingActionButton(
+                      onPressed: nextQuestion,
+                      backgroundColor: Colors.black,
+                      child:
+                          const Icon(Icons.arrow_forward, color: Colors.white),
+                    )),
         ],
       ),
     );

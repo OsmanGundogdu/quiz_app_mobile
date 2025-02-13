@@ -29,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         title:
             const Text("Giriş", style: TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.teal,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,11 +37,17 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             TextField(
               controller: emailController,
-              decoration: const InputDecoration(labelText: "Email"),
+              decoration: const InputDecoration(
+                  labelText: "Email",
+                  labelStyle: TextStyle(color: Colors.black)),
+              style: TextStyle(color: Colors.black),
             ),
             TextField(
               controller: passwordController,
-              decoration: const InputDecoration(labelText: "Şifre"),
+              decoration: const InputDecoration(
+                  labelText: "Şifre",
+                  labelStyle: TextStyle(color: Colors.black)),
+              style: TextStyle(color: Colors.black),
               obscureText: true,
             ),
             ElevatedButton(
@@ -58,7 +65,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   (route) => false,
                 );
               },
-              child: const Text("Giriş Yap"),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
+              child: const Text(
+                "Giriş Yap",
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -69,11 +81,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 );
               },
-              child: const Text("Henüz hesabın yok mu? Hemen kayıt ol!"),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisterScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                child: Text(
+                  "Henüz hesabın yok mu? Hemen kayıt ol!",
+                  style: TextStyle(
+                    color: const Color.fromARGB(255, 0, 104, 93),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
+      backgroundColor: Colors.tealAccent,
     );
   }
 }

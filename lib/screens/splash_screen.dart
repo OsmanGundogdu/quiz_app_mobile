@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/screens/_layout.dart';
-//import 'package:localstorage/localstorage.dart';
 import 'package:quiz_app/screens/login_screen.dart';
-import 'package:quiz_app/screens/quizzes_screen.dart';
-import 'package:quiz_app/screens/user_profile_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
-  // check if there is a user in localstorage
-  // if user logged in successfully, navigate to the QuizListScreen
-  // if user not logged in, navigate to the LoginScreen
-
   const SplashScreen({Key? key}) : super(key: key);
 
   @override

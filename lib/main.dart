@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:quiz_app/screens/leaderboard_screen.dart';
+import 'package:quiz_app/screens/login_screen.dart';
 import 'package:quiz_app/screens/quizzes_screen.dart';
 import 'package:quiz_app/screens/splash_screen.dart';
 import 'package:quiz_app/screens/user_profile_screen.dart';
@@ -22,13 +23,8 @@ class MyApp extends StatelessWidget {
         "/profile": (BuildContext context) => UserProfileScreen(),
         "/quizlist": (BuildContext context) => QuizListScreen(),
         "/leaderboard": (BuildContext context) => LeaderboardScreen(),
+        "/login": (BuildContext context) => LoginScreen(),
       },
-      // login yapan kullanıcının idsi gelecek.
-      // home: UserProfileScreen(
-      //   userID: user['id'],
-      // ),
-
-      // home: SplashScreen(),
       home: SplashScreen(),
     );
   }

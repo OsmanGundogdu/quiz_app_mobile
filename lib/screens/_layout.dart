@@ -19,9 +19,10 @@ class _LayoutState extends State<Layout> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text('Hata: ${snapshot.error}'));
           } else {
-            return snapshot.data ?? Center(child: Text('No data'));
+            return snapshot.data ??
+                Center(child: Text('Herhangi bir veri yok'));
           }
         },
       ),
