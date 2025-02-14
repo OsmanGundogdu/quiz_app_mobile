@@ -29,8 +29,9 @@ class _QuizListScreenState extends State<QuizListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TESTLER", style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.teal,
+        title: Text("TESTLER",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        backgroundColor: Colors.black,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _fetchQuizzes(),
@@ -68,7 +69,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
           );
         },
       ),
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
     );
   }
 }

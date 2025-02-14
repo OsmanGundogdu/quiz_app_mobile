@@ -27,9 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            const Text("Giriş", style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.teal,
+        title: const Text("Giriş",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   (route) => false,
                 );
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
               child: const Text(
                 "Giriş Yap",
                 style:
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
     );
   }
 }

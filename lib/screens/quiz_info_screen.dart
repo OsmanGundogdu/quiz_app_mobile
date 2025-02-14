@@ -45,8 +45,8 @@ class _QuizInfoScreenState extends State<QuizInfoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('TEST DETAYLARI',
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.teal,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        backgroundColor: Colors.black,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -81,7 +81,7 @@ class _QuizInfoScreenState extends State<QuizInfoScreen> {
         child: const Icon(Icons.play_arrow, color: Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
     );
   }
 }

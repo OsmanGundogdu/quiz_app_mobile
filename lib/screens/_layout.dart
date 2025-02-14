@@ -26,10 +26,10 @@ class _LayoutState extends State<Layout> {
           }
         },
       ),
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
       bottomNavigationBar: BottomNavigationBar(
         mouseCursor: SystemMouseCursors.grab,
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.black,
         currentIndex: _selectedIndex,
         onTap: (index) {
           setState(() {
@@ -50,9 +50,10 @@ class _LayoutState extends State<Layout> {
             label: 'Liderlik Tablosu',
           ),
         ],
-        selectedItemColor: Colors.black,
+        selectedItemColor: const Color.fromARGB(255, 88, 88, 88),
         unselectedItemColor: Colors.white,
-        selectedIconTheme: IconThemeData(color: Colors.black, size: 35),
+        selectedIconTheme: IconThemeData(
+            color: const Color.fromARGB(255, 88, 88, 88), size: 35),
         unselectedIconTheme: IconThemeData(color: Colors.white),
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
       ),

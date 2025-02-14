@@ -139,7 +139,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     if (isLoading) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
-        backgroundColor: Colors.tealAccent,
+        backgroundColor: Colors.grey,
       );
     }
 
@@ -148,7 +148,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         appBar: AppBar(
           title: const Text("Sorular",
               style: TextStyle(fontWeight: FontWeight.bold)),
-          backgroundColor: Colors.teal,
+          backgroundColor: Colors.black,
         ),
         body: const Center(
           child: Text(
@@ -156,7 +156,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        backgroundColor: Colors.tealAccent,
+        backgroundColor: Colors.grey,
       );
     }
 
@@ -166,8 +166,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Soru ${currentQuestionIndex + 1} / ${questions.length}",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.teal,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -200,7 +200,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           ],
         ),
       ),
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -256,14 +256,14 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.teal,
+                          backgroundColor: Colors.black,
                           fixedSize: const Size(160, 50)),
                       child: const Text(
                         "TESTİ BİTİR",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                       ))
                   : FloatingActionButton(

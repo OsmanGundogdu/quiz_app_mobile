@@ -44,12 +44,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("PROFİLİM",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.teal,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        backgroundColor: Colors.black,
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.teal,
+              backgroundColor: Colors.black,
               foregroundColor: Colors.black,
             ),
             onPressed: () async {
@@ -111,7 +111,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ],
                   ),
                 ),
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
     );
   }
 }

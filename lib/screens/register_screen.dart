@@ -19,8 +19,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("KAYIT OL",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.teal,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -78,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 );
               },
               style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(Colors.teal),
+                backgroundColor: WidgetStateProperty.all(Colors.black),
               ),
               child: const Text(
                 "Kayıt Ol",
@@ -107,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         ),
       ),
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
     );
   }
 }

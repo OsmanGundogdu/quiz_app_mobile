@@ -34,8 +34,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("LİDERLİK TABLOSU",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.teal,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        backgroundColor: Colors.black,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _fetchLeaderboard(),
@@ -82,7 +82,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
           );
         },
       ),
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
     );
   }
 }

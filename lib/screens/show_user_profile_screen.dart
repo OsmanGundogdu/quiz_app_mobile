@@ -41,8 +41,8 @@ class _ShowUserProfileScreenState extends State<ShowUserProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("${user?.firstName} ${user?.lastName}",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.teal,
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        backgroundColor: Colors.black,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -85,7 +85,7 @@ class _ShowUserProfileScreenState extends State<ShowUserProfileScreen> {
                     ],
                   ),
                 ),
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: Colors.grey,
     );
   }
 }
