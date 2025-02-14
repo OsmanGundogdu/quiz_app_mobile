@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/model/quiz.dart';
 import 'package:quiz_app/model/user.dart';
 import 'package:quiz_app/screens/_layout.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QuestionsScreen extends StatefulWidget {
   final String quizId;
@@ -66,8 +67,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     }
   }
 
-  void _showCompletionDialog() {
-    User? user;
+  void _showCompletionDialog() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString("userId");
+    Future<User> user = User.userProfile(userId!);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -87,9 +90,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   builder: (context) => Layout(),
                 ),
               );
-              setState(() {
-                user!.totalScore = user.totalScore! + dogruCevapSayisi * 5;
-                user.quizzes.add(quiz!);
+              user.then((userData) {
+                setState(() {
+                  userData.totalScore =
+                      userData.totalScore! + dogruCevapSayisi * 5;
+                  userData.quizzes.add(quiz!);
+                });
               });
             },
             child: const Text("Tamam"),
@@ -183,11 +189,47 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               padding: const EdgeInsets.only(left: 32),
               child: currentQuestionIndex == questions.length - 1
                   ? ElevatedButton(
-                      onPressed: _showCompletionDialog,
+                      onPressed: () {
+                        if (selectedOptionsMap.length < questions.length) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              icon: const Icon(Icons.warning,
+                                  color: Colors.yellow, size: 50),
+                              title: const Text("Emin misiniz?"),
+                              content: const Text(
+                                  "Tüm soruları cevaplamadınız. Yine de testi bitirmek istiyor musunuz?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    "Hayır",
+                                    style: TextStyle(color: Colors.green),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    _showCompletionDialog();
+                                  },
+                                  child: const Text(
+                                    "Evet",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          _showCompletionDialog();
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.teal,
-                          fixedSize: Size(160, 50)),
-                      child: Text(
+                          fixedSize: const Size(160, 50)),
+                      child: const Text(
                         "TESTİ BİTİR",
                         style: TextStyle(
                           fontSize: 20,

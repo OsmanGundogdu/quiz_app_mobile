@@ -30,4 +30,15 @@ class Quiz {
 
     return quiz;
   }
+
+  static quizWithoutQuestions(String quizId) {
+    return FirebaseFirestore.instance
+        .collection('quizzes')
+        .doc(quizId)
+        .get()
+        .then((quizDoc) {
+      var map = quizDoc.data() as Map<String, dynamic>;
+      return Quiz(map);
+    });
+  }
 }

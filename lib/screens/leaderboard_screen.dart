@@ -58,9 +58,12 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             itemCount: leaderboard.length,
             itemBuilder: (context, index) {
               var user = leaderboard[index];
+              String firstname = user['firstname'] ?? 'Bilinmiyor';
+              String lastname = user['lastname'] ?? 'Bilinmiyor';
+              int totalScore = user['totalScore'];
               return ListTile(
-                title: Text(user['firstname'] + " " + user['lastname']),
-                subtitle: Text("Puan: ${user['totalScore']}"),
+                title: Text("$firstname $lastname"),
+                subtitle: Text("Puan: $totalScore"),
                 onTap: () => {
                   Navigator.push(
                     context,

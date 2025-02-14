@@ -18,19 +18,19 @@ class _QuizInfoScreenState extends State<QuizInfoScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchQuizData();
+    _fetchQuizDataWithoutQuestions();
   }
 
-  Future<void> _fetchQuizData() async {
+  Future<void> _fetchQuizDataWithoutQuestions() async {
     try {
-      quiz = await Quiz.quizWithQuestions(widget.quizId);
+      quiz = await Quiz.quizWithoutQuestions(widget.quizId);
       if (mounted) {
         setState(() {
           isLoading = false;
         });
       }
     } catch (e) {
-      print("Test biligileri çekilirken beklenmeyen bir hata oluştu: $e");
+      print("Test bilgileri çekilirken beklenmeyen bir hata oluştu: $e");
       if (mounted) {
         setState(() {
           quiz = null;

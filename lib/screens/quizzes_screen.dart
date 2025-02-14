@@ -19,19 +19,6 @@ class _QuizListScreenState extends State<QuizListScreen> {
     for (var quizDoc in quizSnapshot.docs) {
       Map<String, dynamic> quizData = quizDoc.data() as Map<String, dynamic>;
       quizData['id'] = quizDoc.id;
-
-      List<DocumentReference> questionRefs =
-          List<DocumentReference>.from(quizData['questions']);
-      List<Map<String, dynamic>> questions = [];
-
-      for (var ref in questionRefs) {
-        DocumentSnapshot questionSnapshot = await ref.get();
-        Map<String, dynamic> questionData =
-            questionSnapshot.data() as Map<String, dynamic>;
-        questions.add(questionData);
-      }
-
-      quizData['questions'] = questions;
       quizzes.add(quizData);
     }
 
