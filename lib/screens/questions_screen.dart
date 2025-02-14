@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/model/quiz.dart';
-import 'package:quiz_app/model/user.dart';
 import 'package:quiz_app/screens/_layout.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,6 +20,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   List<Map<String, dynamic>> questions = [];
   Map<int, String> selectedOptionsMap = {};
   int dogruCevapSayisi = 0;
+  List<String> answers = ["", "", "", "", ""];
 
   @override
   void initState() {
@@ -67,10 +68,49 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     }
   }
 
+  Future<void> updateUserScore(
+      String userId, int scoreIncrease, String quizId) async {
+    try {
+      final userRef =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+      final quizRef =
+          FirebaseFirestore.instance.collection('quizzes').doc(quizId);
+
+      final userSnapshot = await userRef.get();
+      if (!userSnapshot.exists) {
+        print("Kullanıcı bulunamadı!");
+        return;
+      }
+
+      final userData = userSnapshot.data();
+      int currentScore = userData?["totalScore"] ?? 0;
+      List<dynamic> quizzesTaken = userData?["quizzesTaken"] ?? [];
+
+      int updatedScore = currentScore;
+
+      // don't add if the quiz is already taken
+      if (!quizzesTaken.contains(quizRef)) {
+        quizzesTaken.add(quizRef);
+        updatedScore = currentScore + scoreIncrease;
+      }
+
+      await userRef.update({
+        "totalScore": updatedScore,
+        "quizzesTaken": quizzesTaken,
+      });
+    } catch (e) {
+      print("Hata: $e");
+    }
+  }
+
   void _showCompletionDialog() async {
     final prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString("userId");
-    Future<User> user = User.userProfile(userId!);
+
+    if (userId != null) {
+      await updateUserScore(userId, dogruCevapSayisi * 5, widget.quizId);
+    }
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -80,23 +120,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              // first pop for closing the dialog
               Navigator.pop(context);
-              // second pop for go back to the main screen
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => Layout(),
-                ),
+                MaterialPageRoute(builder: (context) => Layout()),
               );
-              user.then((userData) {
-                setState(() {
-                  userData.totalScore =
-                      userData.totalScore! + dogruCevapSayisi * 5;
-                  userData.quizzes.add(quiz!);
-                });
-              });
             },
             child: const Text("Tamam"),
           ),
