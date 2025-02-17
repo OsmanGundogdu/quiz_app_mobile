@@ -83,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: const Text(
                 "Kayıt Ol",
                 style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
               ),
             ),
             TextButton(

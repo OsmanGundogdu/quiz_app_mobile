@@ -17,7 +17,19 @@ class _LayoutState extends State<Layout> {
         future: _getPage(_selectedIndex),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            );
           } else if (snapshot.hasError) {
             return Center(child: Text('Hata: ${snapshot.error}'));
           } else {
@@ -38,12 +50,12 @@ class _LayoutState extends State<Layout> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Ana sayfa',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profilim',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Ana sayfa',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.leaderboard_rounded),
@@ -65,12 +77,12 @@ class _LayoutState extends State<Layout> {
   Future<Widget> _getPage(int index) async {
     switch (index) {
       case 0:
-        return QuizListScreen();
+        return UserProfileScreen();
       case 1:
         final prefs = await SharedPreferences.getInstance();
         String? userId = prefs.getString("userId");
         if (userId != null) {
-          return UserProfileScreen();
+          return QuizListScreen();
         } else {
           return Center(child: Text('İlgili kullanıcı bulunamadı'));
         }

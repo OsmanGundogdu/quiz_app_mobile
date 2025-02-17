@@ -47,9 +47,23 @@ class _QuizInfoScreenState extends State<QuizInfoScreen> {
         title: Text('TEST DETAYLARI',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
         backgroundColor: Colors.black,
+        foregroundColor: Colors.grey,
+        centerTitle: true,
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            )
           : quiz == null
               ? const Center(child: Text("Test bulunamadı"))
               : Padding(

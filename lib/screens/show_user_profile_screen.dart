@@ -43,9 +43,25 @@ class _ShowUserProfileScreenState extends State<ShowUserProfileScreen> {
         title: Text("${user?.firstName} ${user?.lastName}",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
         backgroundColor: Colors.black,
+        foregroundColor: Colors.grey,
+        centerTitle: true,
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                  const SizedBox(height: 16),
+                  const CircularProgressIndicator(),
+                ],
+              ),
+            )
           : user == null
               ? const Center(child: Text("Kullanıcı bulunamadı"))
               : Padding(
@@ -54,32 +70,43 @@ class _ShowUserProfileScreenState extends State<ShowUserProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                          "İsim: ${user?.firstName ?? 'Herhangi bir veri yok...'}",
-                          style: const TextStyle(fontSize: 18)),
+                        "İsim: ${user?.firstName ?? 'Herhangi bir veri yok...'}",
+                        style: const TextStyle(fontSize: 18),
+                      ),
                       const SizedBox(height: 8),
                       Text(
-                          "Soyisim: ${user?.lastName ?? 'Herhangi bir veri yok...'}",
-                          style: const TextStyle(fontSize: 18)),
+                        "Soyisim: ${user?.lastName ?? 'Herhangi bir veri yok...'}",
+                        style: const TextStyle(fontSize: 18),
+                      ),
                       const SizedBox(height: 8),
                       Text(
-                          "Email: ${user?.email ?? 'Herhangi bir veri yok...'}",
-                          style: const TextStyle(fontSize: 18)),
+                        "Email: ${user?.email ?? 'Herhangi bir veri yok...'}",
+                        style: const TextStyle(fontSize: 18),
+                      ),
                       const SizedBox(height: 8),
-                      Text("Toplam puan: ${user?.totalScore ?? 0}",
-                          style: const TextStyle(fontSize: 18)),
+                      Text(
+                        "Toplam puan: ${user?.totalScore ?? 0}",
+                        style: const TextStyle(fontSize: 18),
+                      ),
                       const SizedBox(height: 16),
-                      const Text("Yapılmış Testler:",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text(
+                        "Yapılmış Testler:",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
                       const SizedBox(height: 8),
                       user!.quizzes.isEmpty
-                          ? const Text("*** Henüz test çözülmedi ***",
-                              style: TextStyle(fontSize: 16))
+                          ? const Text(
+                              "*** Henüz test çözülmedi ***",
+                              style: TextStyle(fontSize: 16),
+                            )
                           : Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: user!.quizzes
-                                  .map((quiz) => Text("- ${quiz.title}",
-                                      style: const TextStyle(fontSize: 16)))
+                                  .map((quiz) => Text(
+                                        "- ${quiz.title}",
+                                        style: const TextStyle(fontSize: 16),
+                                      ))
                                   .toList(),
                             ),
                     ],

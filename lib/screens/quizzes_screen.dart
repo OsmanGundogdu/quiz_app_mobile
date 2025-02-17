@@ -32,12 +32,25 @@ class _QuizListScreenState extends State<QuizListScreen> {
         title: Text("TESTLER",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
         backgroundColor: Colors.black,
+        centerTitle: true,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _fetchQuizzes(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            );
           }
 
           if (snapshot.hasError) {
@@ -49,23 +62,63 @@ class _QuizListScreenState extends State<QuizListScreen> {
           }
 
           List<Map<String, dynamic>> quizzes = snapshot.data!;
-          return ListView.builder(
-            itemCount: quizzes.length,
-            itemBuilder: (context, index) {
-              var quiz = quizzes[index];
-              return ListTile(
-                title: Text(quiz['title']),
-                subtitle: Text("${quiz['questions'].length} Soru"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QuizInfoScreen(quizId: quiz['id']),
+          return ListView(
+            padding: const EdgeInsets.all(8),
+            children: quizzes.map((quiz) {
+              return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            QuizInfoScreen(quizId: quiz['id']),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 4,
+                          offset: Offset(2, 2),
+                        ),
+                      ],
                     ),
-                  );
-                },
-              );
-            },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              quiz['title'],
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "${quiz['questions'].length} Soru",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 14),
+                            ),
+                          ],
+                        ),
+                        Icon(Icons.info_sharp, color: Colors.black, size: 30),
+                      ],
+                    ),
+                  ));
+            }).toList(),
           );
         },
       ),

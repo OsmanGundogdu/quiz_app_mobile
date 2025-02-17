@@ -88,7 +88,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
       int updatedScore = currentScore;
 
-      // don't add if the quiz is already taken
       if (!quizzesTaken.contains(quizRef)) {
         quizzesTaken.add(quizRef);
         updatedScore = currentScore + scoreIncrease;
@@ -137,8 +136,20 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/logo.png',
+                width: 100.0,
+                height: 100.0,
+              ),
+              CircularProgressIndicator(),
+            ],
+          ),
+        ),
         backgroundColor: Colors.grey,
       );
     }
@@ -149,6 +160,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           title: const Text("Sorular",
               style: TextStyle(fontWeight: FontWeight.bold)),
           backgroundColor: Colors.black,
+          foregroundColor: Colors.grey,
+          centerTitle: true,
         ),
         body: const Center(
           child: Text(
@@ -168,6 +181,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         title: Text("Soru ${currentQuestionIndex + 1} / ${questions.length}",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
         backgroundColor: Colors.black,
+        foregroundColor: Colors.grey,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -182,7 +197,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             Column(
               children: question["options"].map<Widget>((option) {
                 return Card(
-                  color: selectedOption == option ? Colors.green : Colors.white,
+                  color: selectedOption == option
+                      ? const Color.fromARGB(255, 90, 90, 90)
+                      : Colors.white,
                   child: ListTile(
                     title: Text(option),
                     onTap: () {

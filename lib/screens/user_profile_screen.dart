@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/model/user.dart';
+import 'package:quiz_app/screens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -46,6 +47,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         title: const Text("PROFİLİM",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
         backgroundColor: Colors.black,
+        foregroundColor: Colors.grey,
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -55,23 +57,41 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
               prefs.remove("userId");
-              Navigator.pushReplacementNamed(context, "/login");
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SplashScreen(),
+                ),
+                (route) => false,
+              );
             },
             child: Row(
               children: [
                 Text(
                   "Çıkış Yap",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.grey),
                 ),
                 SizedBox(width: 8),
-                Icon(Icons.logout_sharp, color: Colors.black),
+                Icon(Icons.logout_sharp, color: Colors.grey),
               ],
             ),
           ),
         ],
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/logo.png',
+                  width: 100.0,
+                  height: 100.0,
+                ),
+                CircularProgressIndicator(),
+              ],
+            ))
           : user == null
               ? const Center(child: Text("Kullanıcı bulunamadı"))
               : Padding(

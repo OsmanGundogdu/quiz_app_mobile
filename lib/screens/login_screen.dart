@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: const Text(
                 "Giriş Yap",
                 style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
               ),
             ),
             TextButton(
