@@ -51,13 +51,47 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   }
 
   void nextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
-      setState(() {
-        currentQuestionIndex++;
-      });
-    } else {
-      _showCompletionDialog();
+    final selectedOption = selectedOptionsMap[currentQuestionIndex];
+    final correctAnswer = questions[currentQuestionIndex]["correctAnswer"];
+
+    if (selectedOption == null) {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          icon: const Icon(Icons.warning, color: Colors.yellow, size: 50),
+          title: const Text("Emin misiniz?"),
+          content: const Text(
+              "Herhangi bir şık seçmediniz. Yine de devam etmek istiyor musunuz?"),
+          actionsAlignment: MainAxisAlignment.spaceBetween,
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child:
+                  const Text("Geri Dön", style: TextStyle(color: Colors.green)),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                setState(() {
+                  currentQuestionIndex++;
+                });
+              },
+              child: const Text("Yine de Devam Et",
+                  style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        ),
+      );
+      return;
     }
+
+    if (selectedOption == correctAnswer) {
+      dogruCevapSayisi++;
+    }
+
+    setState(() {
+      currentQuestionIndex++;
+    });
   }
 
   void previousQuestion() {
@@ -205,9 +239,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     onTap: () {
                       setState(() {
                         selectedOptionsMap[currentQuestionIndex] = option;
-                        if (option == question["correctAnswer"]) {
-                          dogruCevapSayisi++;
-                        }
                       });
                     },
                   ),
