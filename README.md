@@ -1,28 +1,24 @@
-# Word Hunting
+# Quiz App
 
-**Word Hunting** is a Scrabble-inspired multiplayer word game built with **Flutter**. The game follows classic Scrabble rules, offering players a fun and competitive experience on mobile devices.
+A competitive quiz application where users can solve tests and compete with real people on a leaderboard.
 
 ## Features
 
-- ✅ Multiplayer word game experience
-- ✅ Classic Scrabble rule implementation
-- ✅ Login & registration screens
-- ✅ Active and completed games view
-- ✅ Interactive game board with scoring logic
+- User registration and login
+- Interactive quiz solving
+- Leaderboard to track top performers
+- User profile management
+- Clean and responsive UI
 
-## Getting Started
+### Prerequisites
 
-To run the app locally on your machine:
+- Flutter SDK installed
+- Dart enabled
+- A device or emulator to run the app
 
-```bash
-# Clone the repository
-git clone https://github.com/your-username/word-hunting.git
+### Installation
 
-# Navigate to the project directory
-cd word-hunting
-
-# Install dependencies
-flutter pub get
-
-# Run the app
-flutter run
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/quiz-app.git
+   cd quiz-app
